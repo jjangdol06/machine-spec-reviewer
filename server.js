@@ -19,7 +19,7 @@ const types = {
 
 http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
-  if (urlPath === '/') urlPath = '/abb_robot_simulator.html';
+  if (urlPath === '/') urlPath = '/index.html';
   const filePath = path.join(root, urlPath);
   if (!filePath.startsWith(root)) { res.writeHead(403); res.end('Forbidden'); return; }
   fs.readFile(filePath, (err, data) => {
