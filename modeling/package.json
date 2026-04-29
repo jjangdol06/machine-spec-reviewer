@@ -1,0 +1,18 @@
+{
+  "name": "modeling",
+  "version": "1.0.0",
+  "description": "시뮬레이터는 `modeling/<MODEL>/` 폴더에서 GLB 파일을 자동 로드합니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "occt-import-js": "^0.0.23",
+    "pdfkit": "^0.18.0"
+  }
+}

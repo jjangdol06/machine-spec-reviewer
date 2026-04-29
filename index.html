@@ -20,6 +20,16 @@
   .row input[type=range] { flex: 1; accent-color: #ff6b35; }
   .row .value { width: 56px; text-align: right; font-family: 'Consolas', monospace;
                 font-size: 12px; color: #ffd166; }
+  input.jval {
+    width: 56px; text-align: right; font-family: 'Consolas', monospace;
+    font-size: 12px; color: #ffd166;
+    background: #2f343c; border: 1px solid #3d434c; border-radius: 3px;
+    padding: 2px 4px;
+  }
+  input.jval::-webkit-inner-spin-button,
+  input.jval::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input.jval:focus { outline: none; border-color: #ff6b35; }
+  .row .unit { color: #80858f; font-size: 11px; width: 12px; text-align: left; }
   select, button {
     background: #2f343c; color: #e6e8eb; border: 1px solid #3d434c;
     padding: 6px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;
@@ -69,7 +79,6 @@
         <option value="IRB2600">IRB 2600-12/1.65 (12kg, 1.65m)</option>
         <option value="IRB4600" selected>IRB 4600-60/2.05 (60kg, 2.05m)</option>
         <option value="IRB6700">IRB 6700-200/2.60 (200kg, 2.60m)</option>
-        <option value="IRB7600">IRB 7600-500/2.55 (500kg, 2.55m)</option>
       </select>
     </div>
     <div class="row">
@@ -78,7 +87,7 @@
       <span class="value" id="robotDistanceVal">mm</span>
     </div>
     <div class="row">
-      <label>테이블⌀</label>
+      <label>C 테이블</label>
       <input type="number" id="tableDia" min="100" max="3000" step="10" value="1000" style="flex:1; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 8px; border-radius:4px; font-family:'Consolas',monospace"/>
       <span class="value" id="tableDiaV">mm</span>
     </div>
@@ -89,18 +98,28 @@
       <input type="number" id="wsZ" min="100" max="5000" step="50" value="1500" title="Z (좌우, mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
     </div>
     <div style="font-size:10px; color:#80858f; margin:-4px 0 6px 70px">X × Y × Z (mm), C-테이블 중심 (0,0,0)</div>
+    <div class="row">
+      <label>로봇 H</label>
+      <input type="number" id="robotHeight" min="0" max="2000" step="50" value="0" style="flex:1; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 8px; border-radius:4px; font-family:'Consolas',monospace"/>
+      <span class="value" id="robotHeightVal">mm</span>
+    </div>
+    <div class="row">
+      <label>포지셔너 H</label>
+      <input type="number" id="positionerHeight" min="0" max="2000" step="50" value="0" style="flex:1; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 8px; border-radius:4px; font-family:'Consolas',monospace"/>
+      <span class="value" id="positionerHeightVal">mm</span>
+    </div>
 
     <h3>로봇 축 (J1~J6)</h3>
-    <div class="row"><label>J1</label><input type="range" id="j1" min="-180" max="180" step="1" value="0"/><span class="value" id="j1v">0°</span></div>
-    <div class="row"><label>J2</label><input type="range" id="j2" min="-90" max="120" step="1" value="-30"/><span class="value" id="j2v">-30°</span></div>
-    <div class="row"><label>J3</label><input type="range" id="j3" min="-180" max="80" step="1" value="40"/><span class="value" id="j3v">40°</span></div>
-    <div class="row"><label>J4</label><input type="range" id="j4" min="-200" max="200" step="1" value="0"/><span class="value" id="j4v">0°</span></div>
-    <div class="row"><label>J5</label><input type="range" id="j5" min="-120" max="120" step="1" value="60"/><span class="value" id="j5v">60°</span></div>
-    <div class="row"><label>J6</label><input type="range" id="j6" min="-360" max="360" step="1" value="0"/><span class="value" id="j6v">0°</span></div>
+    <div class="row"><label>J1</label><input type="range" id="j1" min="-180" max="180" step="1" value="0"/><input type="number" class="jval" id="j1v" min="-180" max="180" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>J2</label><input type="range" id="j2" min="-90" max="120" step="1" value="0"/><input type="number" class="jval" id="j2v" min="-90" max="120" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>J3</label><input type="range" id="j3" min="-180" max="80" step="1" value="0"/><input type="number" class="jval" id="j3v" min="-180" max="80" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>J4</label><input type="range" id="j4" min="-200" max="200" step="1" value="0"/><input type="number" class="jval" id="j4v" min="-200" max="200" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>J5</label><input type="range" id="j5" min="-120" max="120" step="1" value="0"/><input type="number" class="jval" id="j5v" min="-120" max="120" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>J6</label><input type="range" id="j6" min="-360" max="360" step="1" value="0"/><input type="number" class="jval" id="j6v" min="-360" max="360" step="1" value="0"/><span class="unit">°</span></div>
 
     <h3>포지셔너 (A/C축)</h3>
-    <div class="row"><label>A축</label><input type="range" id="axisA" min="-120" max="120" step="1" value="0"/><span class="value" id="axisAv">0°</span></div>
-    <div class="row"><label>C축</label><input type="range" id="axisC" min="-360" max="360" step="1" value="0"/><span class="value" id="axisCv">0°</span></div>
+    <div class="row"><label>A축</label><input type="range" id="axisA" min="-120" max="120" step="1" value="0"/><input type="number" class="jval" id="axisAv" min="-120" max="120" step="1" value="0"/><span class="unit">°</span></div>
+    <div class="row"><label>C축</label><input type="range" id="axisC" min="-360" max="360" step="1" value="0"/><input type="number" class="jval" id="axisCv" min="-360" max="360" step="1" value="0"/><span class="unit">°</span></div>
 
     <h3>TCP 위치 (월드 좌표)</h3>
     <div class="info-box" id="tcpInfo">
@@ -114,20 +133,64 @@
     </div>
 
     <h3>표시 옵션</h3>
-    <div class="checkbox-row"><input type="checkbox" id="showWorkspace" checked/><label for="showWorkspace">작업 영역 (도달 가능 반경)</label></div>
+    <div class="checkbox-row"><input type="checkbox" id="showWorkspace" /><label for="showWorkspace">작업 영역 (도달 가능 반경)</label></div>
     <div class="checkbox-row"><input type="checkbox" id="showFrame" checked/><label for="showFrame">TCP 좌표계 표시</label></div>
     <div class="checkbox-row"><input type="checkbox" id="showTrail"/><label for="showTrail">TCP 궤적 표시</label></div>
-    <div class="checkbox-row"><input type="checkbox" id="showCollisionZone" checked/><label for="showCollisionZone">충돌 경고 영역 (포지셔너)</label></div>
     <div class="checkbox-row"><input type="checkbox" id="showWorkingStroke" checked/><label for="showWorkingStroke">작업 스트로크 박스</label></div>
     <div class="button-row">
       <button id="clearTrail">궤적 초기화</button>
     </div>
 
+    <h3>프로젝트</h3>
+    <div class="button-row">
+      <button id="saveSettings">설정 저장</button>
+      <button id="loadSettings">설정 불러오기</button>
+      <button id="generateReport" class="primary">보고서 생성</button>
+    </div>
+    <input type="file" id="loadFile" accept=".json" style="display:none"/>
+
+    <h3>워크오브젝트 적층</h3>
+    <div class="row">
+      <label>형상</label>
+      <select id="woShape" style="flex:1">
+        <option value="box" selected>직육면체</option>
+        <option value="cylinder">원기둥</option>
+      </select>
+    </div>
+    <div class="row" id="woBoxDims">
+      <label>치수</label>
+      <input type="number" id="woX" value="200" min="20" max="2000" step="10" title="X (mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
+      <input type="number" id="woY" value="100" min="10" max="2000" step="10" title="Y (mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
+      <input type="number" id="woZ" value="200" min="20" max="2000" step="10" title="Z (mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
+    </div>
+    <div class="row" id="woCylDims" style="display:none">
+      <label>치수</label>
+      <input type="number" id="woD" value="200" min="20" max="2000" step="10" title="지름 (mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
+      <input type="number" id="woH" value="100" min="10" max="2000" step="10" title="높이 (mm)" style="flex:1; min-width:0; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 6px; border-radius:4px; font-family:'Consolas',monospace; font-size:11px"/>
+    </div>
+    <div style="font-size:10px; color:#80858f; margin:-4px 0 6px 70px">치수는 mm 단위</div>
+    <div class="row">
+      <label>층 높이</label>
+      <input type="number" id="woLayerH" value="10" min="1" max="100" step="1" style="flex:1; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 8px; border-radius:4px; font-family:'Consolas',monospace"/>
+      <span class="value">mm</span>
+    </div>
+    <div class="row">
+      <label>패스 폭</label>
+      <input type="number" id="woTrack" value="10" min="1" max="100" step="1" style="flex:1; background:#2f343c; color:#e6e8eb; border:1px solid #3d434c; padding:4px 8px; border-radius:4px; font-family:'Consolas',monospace"/>
+      <span class="value">mm</span>
+    </div>
+    <div class="button-row">
+      <button id="woBuild">패스 생성</button>
+      <button id="woPlay" class="primary">▶ 적층 재생</button>
+      <button id="woReset">초기화</button>
+    </div>
+    <div class="info-box" style="margin-top:6px">
+      포인트: <span class="v" id="woPointCount">0</span> &nbsp; 적층: <span class="v" id="woDepositCount">0</span>
+    </div>
+
     <h3>경로 시뮬레이션</h3>
     <div class="button-row">
       <button id="presetHome">홈 자세</button>
-      <button id="presetReady">준비 자세</button>
-      <button id="presetWeld">용접 시작</button>
     </div>
     <div class="button-row">
       <button id="recordPose">현재 자세 저장</button>
@@ -151,13 +214,16 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js"
+    "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
 }
 </script>
 
 <script type="module">
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
 // ============================================================
 //  OrbitControls (간소화 버전 - 외부 의존성 없이 동작)
@@ -219,30 +285,32 @@ class OrbitControls {
 const ABB_ORANGE = 0xff6b1f;
 const ROBOT_SPECS = {
   // IRB 2600-12/1.65  (12kg payload, 1.65m reach) — datasheet 3HAC033453-001
+  // a3,d3: J3→J4 elbow offset. a4: J4→J5 forearm. a5: J5→J6.
   IRB2600: {
     name: 'IRB 2600-12/1.65', payload: 12, reach: 1.65,
     d1: 0.445, a1: 0.150, a2: 0.700, d4: 0.795, d6: 0.085,
+    a3: 0.297, d3: 0.115, a4: 0.498, a5: 0.054,
     limits: { j1:[-180,180], j2:[-95,155], j3:[-180,75], j4:[-400,400], j5:[-120,120], j6:[-400,400] },
     color: ABB_ORANGE,
   },
-  // IRB 4600-60/2.05 (60kg payload, 2.05m reach) — datasheet 3HAC032885-001
   IRB4600: {
     name: 'IRB 4600-60/2.05', payload: 60, reach: 2.05,
     d1: 0.495, a1: 0.175, a2: 0.900, d4: 0.960, d6: 0.135,
+    a3: 0.343, d3: 0.175, a4: 0.617, a5: 0.073,
     limits: { j1:[-180,180], j2:[-90,150], j3:[-180,75], j4:[-400,400], j5:[-125,120], j6:[-400,400] },
     color: ABB_ORANGE,
   },
-  // IRB 6700-200/2.60 (200kg payload, 2.60m reach) — datasheet 3HAC042927-001
   IRB6700: {
     name: 'IRB 6700-200/2.60', payload: 200, reach: 2.60,
     d1: 0.780, a1: 0.320, a2: 1.125, d4: 1.142, d6: 0.200,
+    a3: 0.235, d3: 0.355, a4: 0.946, a5: 0.166,
     limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
-  // IRB 7600-500/2.55 (500kg payload, 2.55m reach) — datasheet 3HAC022031-001
   IRB7600: {
     name: 'IRB 7600-500/2.55', payload: 500, reach: 2.55,
     d1: 0.780, a1: 0.410, a2: 1.075, d4: 1.392, d6: 0.250,
+    a3: 0.300, d3: 0.200, a4: 0.900, a5: 0.180,
     limits: { j1:[-180,180], j2:[-60,85], j3:[-180,60], j4:[-300,300], j5:[-100,100], j6:[-360,360] },
     color: ABB_ORANGE,
   },
@@ -397,15 +465,6 @@ for (let i = 0; i < 4; i++) {
   tableScaleGroup.add(slot);
 }
 
-// 충돌 경고 영역 (포지셔너 주변 구)
-const collisionZoneMat = new THREE.MeshBasicMaterial({
-  color: 0xff4444, transparent: true, opacity: 0.08, wireframe: false, side: THREE.DoubleSide
-});
-const collisionZone = new THREE.Mesh(
-  new THREE.SphereGeometry(0.95, 24, 16), collisionZoneMat
-);
-positionerGroup.add(collisionZone);
-
 // ============================================================
 //  ABB 로봇 모델 (파라메트릭)
 //  6축 (J1: base Z회전, J2: shoulder Y회전, J3: elbow Y회전,
@@ -460,6 +519,14 @@ function buildRobot(specKey) {
   j1Joint.position.y = 0.025;
   j1Group.add(j1Joint);
 
+  // 어깨 캐스팅 — J1 상단과 J2 축 사이의 수평 오프셋(a1)을 시각적으로 연결
+  const shoulderCasting = new THREE.Mesh(
+    new THREE.BoxGeometry(spec.a1 + 0.18, 0.22, 0.26), orange
+  );
+  shoulderCasting.position.set(spec.a1/2, spec.d1 - 0.18 - 0.11, 0);
+  shoulderCasting.castShadow = true;
+  j1Group.add(shoulderCasting);
+
   // J2: 어깨 (Y축 회전) - J1 상단에 위치
   const j2Group = new THREE.Group();
   j2Group.position.set(spec.a1, spec.d1 - 0.18, 0);
@@ -500,9 +567,9 @@ function buildRobot(specKey) {
   forearm.castShadow = true;
   j3Group.add(forearm);
 
-  // J4: 전박 롤 (X축 회전) - J3 다음
+  // J4: 전박 롤 (X축 회전) - J3에서 (a3, d3, 0) 떨어진 곳에 위치 (실제 CAD 매칭)
   const j4Group = new THREE.Group();
-  j4Group.position.set(spec.d4, 0, 0);
+  j4Group.position.set(spec.a3 ?? spec.d4, spec.d3 ?? 0, 0);
   j3Group.add(j4Group);
 
   // J4 표시 (회전 디스크)
@@ -512,9 +579,9 @@ function buildRobot(specKey) {
   j4Joint.rotation.z = Math.PI/2;
   j4Group.add(j4Joint);
 
-  // J5: 손목 피치 (Y축 회전)
+  // J5: 손목 피치 (Y축 회전) - J4에서 (a4, 0, 0) 떨어진 곳 (실제 CAD)
   const j5Group = new THREE.Group();
-  j5Group.position.set(0.05, 0, 0);
+  j5Group.position.set(spec.a4 ?? 0.05, 0, 0);
   j4Group.add(j5Group);
 
   const j5Joint = new THREE.Mesh(
@@ -523,125 +590,190 @@ function buildRobot(specKey) {
   j5Joint.rotation.x = Math.PI/2;
   j5Group.add(j5Joint);
 
-  // J6: 툴 롤 (X축 회전)
+  // J6: 툴 롤 (X축 회전) - J5에서 (a5, 0, 0) (실제 CAD)
   const j6Group = new THREE.Group();
-  j6Group.position.set(0.04, 0, 0);
+  j6Group.position.set(spec.a5 ?? 0.04, 0, 0);
   j5Group.add(j6Group);
 
-  // === J6 끝단: 플랜지 + 브라켓 + 수직 결합 모듈 (TCP가 바닥 향함) ===
-  // 좌표계: j6Group 로컬, +X = J6 회전축, +Y = 위
-  // 모듈은 j6 로컬 -Y로 매달려 끝(TCP)이 바닥을 향함.
-  // 브라켓 = 베이스(플랜지 결합) + 수평 암(+X) + 수직 드롭 플레이트(-Y).
-  // 모듈의 원기둥 옆면이 드롭 플레이트 측면에 클램프로 결합.
-  const FLANGE_X    = 0.012;
-  const BR_BASE_THK = 0.012;
-  const BR_BASE_W   = 0.13;
-  const BR_BASE_X0  = FLANGE_X + 0.012;
-  const BR_ARM_LEN  = 0.16;
-  const BR_ARM_THK  = 0.012;
-  const BR_ARM_W    = 0.10;
-  const BR_ARM_Y    = 0;                          // 플랜지 중심 높이
-  const BR_DROP_LEN = 0.18;                       // 드롭 플레이트 수직 길이
-  const BR_DROP_THK = 0.012;
-  const BR_DROP_W   = 0.10;
-  const MOD_R       = 0.04;
-  const MOD_LEN     = 0.22;
-  const MOD_TIP_LEN = 0.06;
-
-  const MOD_X_CTR   = BR_BASE_X0 + BR_BASE_THK + BR_ARM_LEN - 0.01;
-  const MOD_Y_CTR   = BR_ARM_Y - BR_ARM_THK/2 - BR_DROP_LEN/2;
-  const DROP_Z      = -(MOD_R + BR_DROP_THK/2);   // 모듈 옆에 드롭 플레이트
-
-  // J6 플랜지
+  // === J6 끝단: 플랜지 + STL 모듈 (TCP가 모듈 끝) ===
+  // J6 플랜지 (작은 디스크)
   const flange = new THREE.Mesh(
     new THREE.CylinderGeometry(0.055, 0.06, 0.01, 24),
     new THREE.MeshStandardMaterial({ color: 0xc0c4cc, roughness: 0.3, metalness: 0.85 })
   );
   flange.rotation.z = Math.PI/2;
-  flange.position.x = FLANGE_X;
+  flange.position.x = 0.012;
   j6Group.add(flange);
 
-  // 브라켓
-  const bracketMat = new THREE.MeshStandardMaterial({ color: 0x3a4250, roughness: 0.55, metalness: 0.55 });
-
-  // 베이스 플레이트 — J6 플랜지에 볼트 체결
-  const bracketBase = new THREE.Mesh(
-    new THREE.BoxGeometry(BR_BASE_THK, BR_BASE_W, BR_BASE_W), bracketMat
-  );
-  bracketBase.position.x = BR_BASE_X0 + BR_BASE_THK/2;
-  bracketBase.castShadow = true;
-  j6Group.add(bracketBase);
-
-  // 수평 암 — 모듈 위치까지 +X로 뻗음
-  const bracketArm = new THREE.Mesh(
-    new THREE.BoxGeometry(BR_ARM_LEN, BR_ARM_THK, BR_ARM_W), bracketMat
-  );
-  bracketArm.position.set(BR_BASE_X0 + BR_BASE_THK + BR_ARM_LEN/2, BR_ARM_Y, 0);
-  bracketArm.castShadow = true;
-  j6Group.add(bracketArm);
-
-  // 수직 드롭 플레이트 — 모듈 옆면이 결합되는 면 (X-Y 평면, 노멀 +Z)
-  const bracketDrop = new THREE.Mesh(
-    new THREE.BoxGeometry(BR_DROP_W, BR_DROP_LEN, BR_DROP_THK), bracketMat
-  );
-  bracketDrop.position.set(MOD_X_CTR, MOD_Y_CTR, DROP_Z);
-  bracketDrop.castShadow = true;
-  j6Group.add(bracketDrop);
-
-  // 모듈 (예: 용접 토치 / 그라인더) — 수직 매달림, 끝이 바닥 향함
-  const moduleGroup = new THREE.Group();
-  moduleGroup.position.set(MOD_X_CTR, MOD_Y_CTR, 0);
-  j6Group.add(moduleGroup);
-
-  const moduleBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(MOD_R, MOD_R, MOD_LEN, 24),
-    new THREE.MeshStandardMaterial({ color: 0x202428, roughness: 0.4, metalness: 0.75 })
-  );
-  // 기본 실린더는 Y축 정렬 — 그대로 사용 (수직)
-  moduleBody.castShadow = true;
-  moduleGroup.add(moduleBody);
-
-  // 결합 클램프 밴드 — 원기둥 둘레를 감아 드롭 플레이트와 체결
-  const clampMat = new THREE.MeshStandardMaterial({ color: 0x808890, roughness: 0.3, metalness: 0.85 });
-  for (const y of [-MOD_LEN/2 + 0.04, MOD_LEN/2 - 0.04]) {
-    const clamp = new THREE.Mesh(new THREE.TorusGeometry(MOD_R + 0.004, 0.006, 8, 24), clampMat);
-    clamp.rotation.x = Math.PI/2;        // 토러스 평면을 X-Z로 (수직 원기둥 둘레)
-    clamp.position.y = y;
-    moduleGroup.add(clamp);
+  // STL 모듈 — 항상 표시. mounting 면이 j6 flange 면에 정렬되도록 +X 오프셋 (GLB 로드 후 정확한 flangeX 갱신)
+  let moduleMesh = null;
+  const initialFlangeX = 0.04;     // GLB 없을 때 기본값
+  if (_moduleGeom) {
+    moduleMesh = new THREE.Mesh(
+      _moduleGeom,
+      new THREE.MeshStandardMaterial({ color: 0x404448, roughness: 0.55, metalness: 0.45 })
+    );
+    moduleMesh.castShadow = true;
+    moduleMesh.userData.glb = true;
+    // 모듈 top에서 2/3 내려간 지점(= mesh local Y=-H/3)이 j6 회전축에 정렬되도록 mesh.position.y = +MODULE_HALF_Y/3
+    moduleMesh.position.set(initialFlangeX, MODULE_HALF_Y / 3, 0);
+    j6Group.add(moduleMesh);
+  } else {
+    _pendingModuleAttach = true;
   }
 
-  // 모듈 끝단 팁 (-Y 방향, 바닥 지향)
-  const moduleTip = new THREE.Mesh(
-    new THREE.ConeGeometry(0.022, MOD_TIP_LEN, 12),
-    new THREE.MeshStandardMaterial({ color: 0xffd166, emissive: 0x553300 })
-  );
-  moduleTip.rotation.x = Math.PI;        // 콘 기본은 +Y, 뒤집어서 -Y 향함
-  moduleTip.position.y = -MOD_LEN/2 - MOD_TIP_LEN/2;
-  moduleGroup.add(moduleTip);
-
-  // TCP — 모듈 팁 끝(바닥 방향)
+  // TCP — 모듈 바닥 원 중심. mesh.position.y(+H/3) + bottom mesh local(-H) = -2*MODULE_HALF_Y/3
   const tcpAnchor = new THREE.Object3D();
-  tcpAnchor.position.set(MOD_X_CTR, MOD_Y_CTR - MOD_LEN/2 - MOD_TIP_LEN, 0);
+  tcpAnchor.position.set(initialFlangeX + MODULE_TIP_OFFSET.x, -2 * MODULE_HALF_Y / 3, MODULE_TIP_OFFSET.z);
   j6Group.add(tcpAnchor);
 
   // TCP 좌표계
   const tcpFrame = new THREE.AxesHelper(0.18);
   tcpAnchor.add(tcpFrame);
 
-  // TCP 마커
-  const tcpDot = new THREE.Mesh(
-    new THREE.SphereGeometry(0.022, 16, 12),
-    new THREE.MeshBasicMaterial({ color: 0xffd166 })
-  );
-  tcpAnchor.add(tcpDot);
+  robotParts = { j1Group, j2Group, j3Group, j4Group, j5Group, j6Group, tcpAnchor, tcpFrame, moduleMesh };
 
-  robotParts = { j1Group, j2Group, j3Group, j4Group, j5Group, j6Group, tcpAnchor, tcpFrame };
+  // 파라메트릭 메쉬에 태그 — GLB 로드 시 가시성 토글용
+  robotGroup.traverse(o => {
+    if (o.isMesh && !o.userData.glb) o.userData.parametric = true;
+  });
+  // 즉시 파라메트릭 숨김 (반짝거림 방지). GLB 로드 실패 시만 다시 표시.
+  hideParametric(true);
 
   // 작업 영역 구 업데이트
   if (workspaceSphere) workspaceSphere.geometry.dispose();
   workspaceSphere.geometry = new THREE.SphereGeometry(spec.reach, 32, 16);
   workspaceSphere.position.copy(robotGroup.position);
   workspaceSphere.position.y = spec.d1;
+
+  // 실제 로봇 GLB 모델 시도 (modeling/<MODEL>/{base,link1..link6}.glb)
+  applyRobotGLBs(specKey);
+}
+
+// === 모듈 STL 로드 (welding torch 등 J6 끝단 부착물) ===
+const _stlLoader = new STLLoader();
+let _moduleGeom = null;
+let MODULE_HALF_Y = 0.474;
+const MODULE_TIP_OFFSET = { x: 0, z: 0 };  // 바닥 원 중심의 X,Z 오프셋 (mesh local)
+let _pendingModuleAttach = false;
+function _computeTipOffset(geom) {
+  const positions = geom.attributes.position;
+  const bbox = geom.boundingBox;
+  const minY = bbox.min.y;
+  const cutoff = minY + (bbox.max.y - minY) * 0.05;
+  let sumX = 0, sumZ = 0, count = 0;
+  for (let i = 0; i < positions.count; i++) {
+    if (positions.getY(i) <= cutoff) {
+      sumX += positions.getX(i);
+      sumZ += positions.getZ(i);
+      count++;
+    }
+  }
+  return count ? { x: sumX/count, z: sumZ/count } : { x: 0, z: 0 };
+}
+async function loadModuleGeom() {
+  if (_moduleGeom) return _moduleGeom;
+  try {
+    const geom = await _stlLoader.loadAsync('modeling/module/module.stl');
+    geom.center();
+    geom.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI/2));
+    geom.scale(0.001, 0.001, 0.001);
+    geom.computeVertexNormals();
+    geom.computeBoundingBox();
+    MODULE_HALF_Y = (geom.boundingBox.max.y - geom.boundingBox.min.y) / 2;
+    const t = _computeTipOffset(geom);
+    MODULE_TIP_OFFSET.x = t.x;
+    MODULE_TIP_OFFSET.z = t.z;
+    _moduleGeom = geom;
+    if (_pendingModuleAttach && currentSpec) {
+      _pendingModuleAttach = false;
+      buildRobot(document.getElementById('robotModel').value);
+      applyState(); updateInfo();
+    }
+    return geom;
+  } catch (e) { console.warn('module.stl 로드 실패', e); return null; }
+}
+loadModuleGeom();
+
+// === 실제 로봇 모델(GLB) 로드 — 있으면 파라메트릭 위에 오버레이 ===
+// CAD가 로봇 베이스 절대좌표(Z-up)로 export됐다고 가정.
+// 각 LINK GLB는 calibration pose의 j*Group inverse * robot.matrix * Rx(-π/2) 행렬을
+// 자기 transform으로 가져 CAD 위치를 보존한 채 j*Group의 회전을 따라가도록 함.
+const _gltfLoader = new GLTFLoader();
+async function tryLoadGLB(url) {
+  try {
+    const gltf = await _gltfLoader.loadAsync(url);
+    return gltf.scene;
+  } catch (e) { return null; }
+}
+async function applyRobotGLBs(specKey) {
+  if (!robotParts) return;
+  // calibration pose 강제 (모든 state = 0) — j*Group.matrixWorld가 calibration일 때 캡처
+  const saved = { ...state };
+  Object.assign(state, { j1:0,j2:0,j3:0,j4:0,j5:0,j6:0,axisA:0,axisC:0 });
+  applyState();
+  scene.updateMatrixWorld(true);
+
+  const dir = `modeling/${specKey}/`;
+  const files = [
+    { f: 'base.glb',  parent: robotGroup },
+    { f: 'link1.glb', parent: robotParts.j1Group },
+    { f: 'link2.glb', parent: robotParts.j2Group },
+    { f: 'link3.glb', parent: robotParts.j3Group },
+    { f: 'link4.glb', parent: robotParts.j4Group },
+    { f: 'link5.glb', parent: robotParts.j5Group },
+    { f: 'link6.glb', parent: robotParts.j6Group },
+  ];
+  const robotMat = robotGroup.matrixWorld;
+
+  let anyLoaded = false;
+  let link6Sc = null;
+  for (const p of files) {
+    const sc = await tryLoadGLB(dir + p.f);
+    if (!sc) continue;
+    sc.traverse(o => {
+      if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; o.userData.glb = true; }
+    });
+    sc.userData.glb = true;
+    p.parent.updateMatrixWorld(true);
+    const M = new THREE.Matrix4()
+      .copy(p.parent.matrixWorld).invert()
+      .multiply(robotMat);
+    sc.applyMatrix4(M);
+    p.parent.add(sc);
+    if (p.f === 'link6.glb') link6Sc = sc;
+    anyLoaded = true;
+  }
+
+  // 원래 state 복원
+  Object.assign(state, saved);
+  applyState();
+
+  if (anyLoaded) {
+    hideParametric(true);
+    // LINK6 flange 면 X 위치 측정 → STL 모듈 + TCP 재배치
+    if (link6Sc && robotParts && robotParts.j6Group) {
+      robotParts.j6Group.updateMatrixWorld(true);
+      const wb = new THREE.Box3().setFromObject(link6Sc);
+      const inv = new THREE.Matrix4().copy(robotParts.j6Group.matrixWorld).invert();
+      wb.applyMatrix4(inv);
+      const flangeX = wb.max.x;
+      if (robotParts.moduleMesh) {
+        robotParts.moduleMesh.position.set(flangeX, MODULE_HALF_Y / 3, 0);
+      }
+      if (robotParts.tcpAnchor) {
+        robotParts.tcpAnchor.position.set(flangeX + MODULE_TIP_OFFSET.x, -2 * MODULE_HALF_Y / 3, MODULE_TIP_OFFSET.z);
+      }
+    }
+  } else {
+    // GLB 못 찾음 — 파라메트릭 다시 표시
+    hideParametric(false);
+  }
+}
+function hideParametric(hide) {
+  robotGroup.traverse(o => {
+    if (o.isMesh && o.userData.parametric) o.visible = !hide;
+  });
 }
 
 // 작업 영역 표시 (도달 가능 반경 와이어프레임 구)
@@ -661,14 +793,71 @@ const wsEdges = new THREE.LineSegments(
 );
 cAxisGroup.add(wsEdges);
 
-// 로봇 위치 (포지셔너로부터 거리)
+// === 워크오브젝트 적층 시뮬레이션 ===
+// 워크오브젝트 ghost (와이어프레임, C-테이블 중심 위에)
+const woGhost = new THREE.LineSegments(
+  new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)),
+  new THREE.LineBasicMaterial({ color: 0x55ff88, transparent: true, opacity: 0.55 })
+);
+woGhost.visible = false;
+cAxisGroup.add(woGhost);
+// 적층 재료 — InstancedMesh
+const WO_MAX = 8000;
+const woDeposit = new THREE.InstancedMesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshStandardMaterial({ color: 0xff8855, roughness: 0.6, metalness: 0.2 }),
+  WO_MAX
+);
+woDeposit.count = 0;
+woDeposit.castShadow = true;
+cAxisGroup.add(woDeposit);
+// 툴 팁 마커 (재생 중 현재 위치)
+const woTip = new THREE.Mesh(
+  new THREE.SphereGeometry(0.008, 12, 8),
+  new THREE.MeshBasicMaterial({ color: 0xffff00 })
+);
+woTip.visible = false;
+cAxisGroup.add(woTip);
+
+// 로봇·포지셔너 페더스털 (높이 가시화)
+const pedestalMat = new THREE.MeshStandardMaterial({ color: 0x3a4250, roughness: 0.7, metalness: 0.3 });
+const robotPedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.36, 1, 24), pedestalMat);
+robotPedestal.castShadow = true; robotPedestal.receiveShadow = true;
+robotPedestal.visible = false;
+scene.add(robotPedestal);
+
+const positionerPedestal = new THREE.Mesh(new THREE.BoxGeometry(0.85, 1, 1.05), pedestalMat);
+positionerPedestal.castShadow = true; positionerPedestal.receiveShadow = true;
+positionerPedestal.visible = false;
+scene.add(positionerPedestal);
+
+// 로봇 위치 (포지셔너로부터 거리) + 높이
 let robotDistance = 2.2;
+let robotHeightMm = 0;
+let positionerHeightMm = 0;
+
+function updateRobotPedestal() {
+  const m = robotHeightMm / 1000;
+  if (m < 0.005) { robotPedestal.visible = false; return; }
+  robotPedestal.visible = true;
+  robotPedestal.scale.y = m;
+  robotPedestal.position.set(robotDistance, m / 2, 0);
+}
+function updatePositionerPedestal() {
+  const m = positionerHeightMm / 1000;
+  positionerGroup.position.y = m;
+  if (m < 0.005) { positionerPedestal.visible = false; return; }
+  positionerPedestal.visible = true;
+  positionerPedestal.scale.y = m;
+  positionerPedestal.position.set(0, m / 2, 0);
+}
 function updateRobotPosition() {
-  robotGroup.position.set(robotDistance, 0, 0);
-  robotGroup.rotation.y = Math.PI; // 로봇이 포지셔너를 바라보도록
+  robotGroup.position.set(robotDistance, robotHeightMm / 1000, 0);
+  robotGroup.rotation.y = Math.PI;
   if (workspaceSphere && currentSpec) {
-    workspaceSphere.position.set(robotDistance, currentSpec.d1, 0);
+    workspaceSphere.position.set(robotDistance, robotHeightMm/1000 + currentSpec.d1, 0);
   }
+  updateRobotPedestal();
 }
 
 // ============================================================
@@ -703,22 +892,22 @@ function pushTrail(p) {
 //  현재 자세 상태
 // ============================================================
 const state = {
-  j1: 0, j2: -30, j3: 40, j4: 0, j5: 60, j6: 0,
+  j1: 0, j2: 0, j3: 0, j4: 0, j5: 0, j6: 0,
   axisA: 0, axisC: 0,
 };
 
 function applyState() {
   if (!robotParts) return;
   const r = robotParts;
-  // 로봇: J1=Y축 회전(베이스), J2/J3=Z축 회전(피치), J4=X축 회전(롤),
-  // J5=Z축 회전(피치), J6=X축 회전(롤)
-  // Three.js 기본 좌표계는 Y-up이므로 J1은 Y회전
-  // 로봇이 +Y(robotGroup) 180° 회전된 상태이므로
-  // ABB 컨벤션(J2- = 어깨 뒤/위, J3+ = 팔꿈치 앞/아래)에 맞추기 위해
-  // J2/J3 부호를 반전한다 (시각적으로 자연스러운 방향).
+  // ABB IRB 캘리브레이션 컨벤션:
+  //   J=0 자세 → 상박(upper arm) 수직 위, 전박(forearm) 수평 forward
+  //   J2+ = 상박이 앞쪽으로 기움 (toward target)
+  //   J3+ = 전박이 위쪽으로 들림
+  // 시각 모델은 +X 방향으로 직선 정렬되어 있으므로
+  //   J2 회전축에 +90° 오프셋, J3에 -90° 오프셋을 추가해 위 컨벤션을 맞춤.
   r.j1Group.rotation.y = THREE.MathUtils.degToRad(state.j1);
-  r.j2Group.rotation.z = THREE.MathUtils.degToRad(-state.j2);
-  r.j3Group.rotation.z = THREE.MathUtils.degToRad(-state.j3);
+  r.j2Group.rotation.z = THREE.MathUtils.degToRad(-state.j2) + Math.PI/2;
+  r.j3Group.rotation.z = THREE.MathUtils.degToRad(state.j3)  - Math.PI/2;
   r.j4Group.rotation.x = THREE.MathUtils.degToRad(state.j4);
   r.j5Group.rotation.z = THREE.MathUtils.degToRad(state.j5);
   r.j6Group.rotation.x = THREE.MathUtils.degToRad(state.j6);
@@ -767,14 +956,8 @@ function updateInfo() {
   robotBaseTop.y = currentSpec ? currentSpec.d1 : 0.5;
   const tcpToBase = tcp.pos.distanceTo(robotBaseTop);
 
-  // 포지셔너와의 충돌 영역(원점 기준 0.95m 구)
-  const tcpToPositioner = tcp.pos.length();
-
   if (tcpToBase > reach * 0.99) {
     statusEl.textContent = '⚠ 도달 한계 초과 (out of reach)';
-    statusEl.className = 'warn';
-  } else if (tcpToPositioner < 0.55) {
-    statusEl.textContent = '⚠ 포지셔너 충돌 가능';
     statusEl.className = 'warn';
   } else if (tcpToBase > reach * 0.92) {
     statusEl.textContent = '⚠ 도달 한계 근접';
@@ -790,31 +973,46 @@ function updateInfo() {
 // ============================================================
 //  슬라이더/버튼 바인딩
 // ============================================================
-function bindSlider(id, key, suffix='°', formatter=(v)=>v) {
-  const el = document.getElementById(id);
-  const val = document.getElementById(id+'v');
-  el.value = state[key];
-  val.textContent = formatter(state[key]) + suffix;
-  el.addEventListener('input', () => {
-    state[key] = parseFloat(el.value);
-    val.textContent = formatter(state[key]) + suffix;
+function bindSlider(id, key) {
+  const slider = document.getElementById(id);
+  const input  = document.getElementById(id+'v');
+  slider.value = state[key];
+  input.value  = state[key];
+
+  // 슬라이더 → 즉시 반영
+  slider.addEventListener('input', () => {
+    state[key] = parseFloat(slider.value);
+    input.value = state[key];
+    applyState(); updateInfo();
+  });
+
+  // 입력박스 → 확정(Enter/blur)에서만 반영 — 타이핑 중엔 필드 보존, 사이드이펙트 없음
+  input.addEventListener('change', () => {
+    let v = parseFloat(input.value);
+    const min = parseFloat(slider.min), max = parseFloat(slider.max);
+    if (!Number.isFinite(v)) v = state[key];
+    v = Math.max(min, Math.min(max, v));
+    state[key] = v;
+    slider.value = v;
+    input.value  = v;
     applyState(); updateInfo();
   });
 }
 ['j1','j2','j3','j4','j5','j6','axisA','axisC'].forEach(k => bindSlider(k, k));
 
-// 데이터시트 limits를 J1~J6 슬라이더 min/max에 적용 + 현재값 클램프
+// 데이터시트 limits를 J1~J6 슬라이더 + 입력박스에 적용 + 현재값 클램프
 function applyJointLimitsToSliders(spec) {
   if (!spec || !spec.limits) return;
   for (const k of ['j1','j2','j3','j4','j5','j6']) {
     const [lo, hi] = spec.limits[k];
-    const el = document.getElementById(k);
-    const val = document.getElementById(k+'v');
-    el.min = lo; el.max = hi;
+    const slider = document.getElementById(k);
+    const input  = document.getElementById(k+'v');
+    slider.min = lo; slider.max = hi;
+    input.min = lo;  input.max = hi;
     if (state[k] < lo) state[k] = lo;
     if (state[k] > hi) state[k] = hi;
-    el.value = state[k];
-    val.textContent = state[k] + '°';
+    slider.value = state[k];
+    input.value  = state[k];
   }
 }
 
@@ -890,6 +1088,56 @@ robotDistEl.addEventListener('input', () => {
 robotDistEl.addEventListener('change', clampRobotDistInput);
 clampRobotDistInput();
 
+// 로봇 높이 (mm) — 페더스털
+const robotHeightEl = document.getElementById('robotHeight');
+const robotHeightVal = document.getElementById('robotHeightVal');
+function setRobotHeightMm(mm) {
+  if (!Number.isFinite(mm)) return;
+  robotHeightMm = mm;
+  robotHeightVal.textContent = `mm (${(mm/1000).toFixed(2)}m)`;
+  updateRobotPosition();
+  applyState(); updateInfo();
+}
+function clampRobotHeightInput() {
+  const min = parseFloat(robotHeightEl.min), max = parseFloat(robotHeightEl.max);
+  let mm = parseFloat(robotHeightEl.value);
+  if (!Number.isFinite(mm)) mm = 0;
+  mm = Math.max(min, Math.min(max, mm));
+  robotHeightEl.value = mm;
+  setRobotHeightMm(mm);
+}
+robotHeightEl.addEventListener('input', () => {
+  const mm = parseFloat(robotHeightEl.value);
+  if (Number.isFinite(mm)) setRobotHeightMm(mm);
+});
+robotHeightEl.addEventListener('change', clampRobotHeightInput);
+clampRobotHeightInput();
+
+// 포지셔너 높이 (mm) — 페더스털
+const posHeightEl = document.getElementById('positionerHeight');
+const posHeightVal = document.getElementById('positionerHeightVal');
+function setPosHeightMm(mm) {
+  if (!Number.isFinite(mm)) return;
+  positionerHeightMm = mm;
+  posHeightVal.textContent = `mm (${(mm/1000).toFixed(2)}m)`;
+  updatePositionerPedestal();
+  applyState(); updateInfo();
+}
+function clampPosHeightInput() {
+  const min = parseFloat(posHeightEl.min), max = parseFloat(posHeightEl.max);
+  let mm = parseFloat(posHeightEl.value);
+  if (!Number.isFinite(mm)) mm = 0;
+  mm = Math.max(min, Math.min(max, mm));
+  posHeightEl.value = mm;
+  setPosHeightMm(mm);
+}
+posHeightEl.addEventListener('input', () => {
+  const mm = parseFloat(posHeightEl.value);
+  if (Number.isFinite(mm)) setPosHeightMm(mm);
+});
+posHeightEl.addEventListener('change', clampPosHeightInput);
+clampPosHeightInput();
+
 // 작업 스트로크 (X×Y×Z mm, 바닥 기준)
 const wsXEl = document.getElementById('wsX');
 const wsYEl = document.getElementById('wsY');
@@ -920,7 +1168,7 @@ applyWorkingStroke();
 // 표시 옵션
 const showWorkspace = document.getElementById('showWorkspace');
 showWorkspace.addEventListener('change', () => workspaceSphere.visible = showWorkspace.checked);
-workspaceSphere.visible = true;
+workspaceSphere.visible = false;
 
 const showFrame = document.getElementById('showFrame');
 showFrame.addEventListener('change', () => {
@@ -932,37 +1180,455 @@ showTrail.addEventListener('change', () => {
   trailLine.visible = showTrail.checked;
 });
 
-const showCollisionZone = document.getElementById('showCollisionZone');
-showCollisionZone.addEventListener('change', () => {
-  collisionZone.visible = showCollisionZone.checked;
-});
-
 const showWorkingStroke = document.getElementById('showWorkingStroke');
 showWorkingStroke.addEventListener('change', () => {
   wsEdges.visible = showWorkingStroke.checked;
 });
+
 
 document.getElementById('clearTrail').addEventListener('click', () => {
   trailPoints.length = 0;
   trailGeom.setDrawRange(0, 0);
 });
 
+// ============================================================
+//  설정 저장 / 불러오기 / 보고서 생성
+// ============================================================
+function getCurrentSettings() {
+  return {
+    version: 1,
+    timestamp: new Date().toISOString(),
+    robotModel: document.getElementById('robotModel').value,
+    robotDistanceMm: parseFloat(document.getElementById('robotDistance').value),
+    robotHeightMm,
+    positionerHeightMm,
+    tableDiaMm: parseFloat(document.getElementById('tableDia').value),
+    strokeMm: {
+      x: parseFloat(document.getElementById('wsX').value),
+      y: parseFloat(document.getElementById('wsY').value),
+      z: parseFloat(document.getElementById('wsZ').value),
+    },
+    joints: { j1: state.j1, j2: state.j2, j3: state.j3, j4: state.j4, j5: state.j5, j6: state.j6 },
+    axes:   { axisA: state.axisA, axisC: state.axisC },
+  };
+}
+
+function applySettings(s) {
+  if (!s || typeof s !== 'object') return;
+  // 1) 로봇 모델 먼저 (조인트 한계 갱신 트리거)
+  if (s.robotModel && ROBOT_SPECS[s.robotModel]) {
+    const sel = document.getElementById('robotModel');
+    sel.value = s.robotModel;
+    sel.dispatchEvent(new Event('change'));
+  }
+  // 2) 숫자 입력들
+  const setNumChange = (id, v) => {
+    if (typeof v !== 'number') return;
+    const e = document.getElementById(id);
+    if (!e) return;
+    e.value = v; e.dispatchEvent(new Event('change'));
+  };
+  setNumChange('robotDistance',     s.robotDistanceMm);
+  setNumChange('robotHeight',       s.robotHeightMm);
+  setNumChange('positionerHeight',  s.positionerHeightMm);
+  setNumChange('tableDia',          s.tableDiaMm);
+  if (s.strokeMm) {
+    setNumChange('wsX', s.strokeMm.x);
+    setNumChange('wsY', s.strokeMm.y);
+    setNumChange('wsZ', s.strokeMm.z);
+  }
+  // 3) 조인트/축 — state + UI 직접 갱신
+  const setJoint = (k, v) => {
+    if (typeof v !== 'number') return;
+    state[k] = v;
+    const slider = document.getElementById(k);
+    const input  = document.getElementById(k+'v');
+    if (slider) slider.value = v;
+    if (input)  input.value  = v;
+  };
+  if (s.joints) Object.entries(s.joints).forEach(([k,v]) => setJoint(k, v));
+  if (s.axes)   Object.entries(s.axes  ).forEach(([k,v]) => setJoint(k, v));
+  applyState(); updateInfo();
+}
+
+document.getElementById('saveSettings').addEventListener('click', () => {
+  const s = getCurrentSettings();
+  const blob = new Blob([JSON.stringify(s, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `robot-stage-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('loadSettings').addEventListener('click', () => {
+  document.getElementById('loadFile').click();
+});
+document.getElementById('loadFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try { applySettings(JSON.parse(ev.target.result)); }
+    catch (err) { alert('설정 파일 로드 실패: ' + err.message); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function generateReport() {
+  const tcp = computeTCP();
+  if (!tcp || !currentSpec) { alert('아직 로봇이 준비되지 않음'); return; }
+  const spec = currentSpec;
+  const wp = (obj) => {
+    if (!obj) return null;
+    const v = new THREE.Vector3();
+    obj.getWorldPosition(v);
+    return v;
+  };
+  const r = robotParts;
+  const positions = {
+    'Robot Base':       wp(robotGroup),
+    'J1 axis':          wp(r.j1Group),
+    'J2 axis':          wp(r.j2Group),
+    'J3 axis':          wp(r.j3Group),
+    'J4 axis':          wp(r.j4Group),
+    'J5 axis':          wp(r.j5Group),
+    'J6 axis':          wp(r.j6Group),
+    'TCP':              tcp.pos.clone(),
+    'Positioner Base':  wp(positionerGroup),
+    'C-table Center':   wp(cAxisGroup),
+  };
+  const tableDia = parseFloat(document.getElementById('tableDia').value);
+  const wsX = document.getElementById('wsX').value;
+  const wsY = document.getElementById('wsY').value;
+  const wsZ = document.getElementById('wsZ').value;
+
+  const html = `<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>로봇 셀 셋업 보고서</title>
+<style>
+body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 24px; max-width: 900px; margin: auto; color: #222; }
+h1 { color: #ff6b35; border-bottom: 2px solid #ff6b35; padding-bottom: 8px; }
+h2 { color: #444; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-top: 24px; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 13px; }
+th, td { border: 1px solid #ddd; padding: 6px 12px; text-align: left; }
+th { background: #f5f5f5; font-weight: 600; }
+.coord { font-family: 'Consolas', monospace; }
+.meta { color: #888; font-size: 12px; margin-bottom: 16px; }
+.btn { padding: 8px 16px; background: #ff6b35; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+.btn:hover { background: #ff8255; }
+@media print { body { padding: 0; } .btn { display: none; } }
+</style></head><body>
+<h1>ABB 로봇 셀 셋업 보고서</h1>
+<p class="meta">생성일: ${new Date().toLocaleString('ko-KR')}</p>
+
+<h2>장비 사양</h2>
+<table>
+<tr><th>로봇 모델</th><td>${spec.name}</td></tr>
+<tr><th>페이로드</th><td>${spec.payload} kg</td></tr>
+<tr><th>도달거리</th><td>${spec.reach} m (${(spec.reach*1000).toFixed(0)} mm)</td></tr>
+<tr><th>로봇–포지셔너 거리 (X축)</th><td>${(robotDistance*1000).toFixed(0)} mm</td></tr>
+<tr><th>로봇 페더스털 높이</th><td>${robotHeightMm} mm</td></tr>
+<tr><th>포지셔너 페더스털 높이</th><td>${positionerHeightMm} mm</td></tr>
+<tr><th>C-테이블 지름</th><td>${tableDia.toFixed(0)} mm</td></tr>
+</table>
+
+<h2>조인트 한계 (데이터시트)</h2>
+<table>
+<tr><th>조인트</th><th>최소</th><th>최대</th><th>현재 값</th></tr>
+${Object.entries(spec.limits).map(([k,[lo,hi]]) =>
+  `<tr><td>${k.toUpperCase()}</td><td>${lo}°</td><td>${hi}°</td><td>${state[k].toFixed(2)}°</td></tr>`).join('')}
+</table>
+
+<h2>포지셔너 한계 (Working Range)</h2>
+<table>
+<tr><th>축</th><th>최소</th><th>최대</th><th>스트로크</th></tr>
+<tr><td>A축 (틸트)</td><td>${document.getElementById('axisA').min}°</td><td>${document.getElementById('axisA').max}°</td><td>${parseFloat(document.getElementById('axisA').max) - parseFloat(document.getElementById('axisA').min)}°</td></tr>
+<tr><td>C축 (회전)</td><td>${document.getElementById('axisC').min}°</td><td>${document.getElementById('axisC').max}°</td><td>${parseFloat(document.getElementById('axisC').max) - parseFloat(document.getElementById('axisC').min)}°</td></tr>
+</table>
+
+<h2>월드 좌표 위치 (Three.js Y-up 기준)</h2>
+<table>
+<tr><th>지점</th><th>X</th><th>Y (높이)</th><th>Z</th></tr>
+${Object.entries(positions).map(([k, p]) =>
+  p ? `<tr><td>${k}</td><td class="coord">${(p.x*1000).toFixed(1)} mm</td><td class="coord">${(p.y*1000).toFixed(1)} mm</td><td class="coord">${(p.z*1000).toFixed(1)} mm</td></tr>` : ''
+).join('')}
+</table>
+<p style="font-size:11px;color:#888">* 산업용 좌표(Z-up)로 환산: industrial X = world X, industrial Y = world Z, industrial Z = world Y</p>
+
+<h2>작업 스트로크 (C-테이블 중심 = 상대좌표 0,0,0)</h2>
+<table>
+<tr><th>축</th><th>크기</th></tr>
+<tr><td>X (전후)</td><td>${wsX} mm</td></tr>
+<tr><td>Y (높이)</td><td>${wsY} mm</td></tr>
+<tr><td>Z (좌우)</td><td>${wsZ} mm</td></tr>
+</table>
+
+<p style="margin-top:24px"><button class="btn" onclick="window.print()">프린트 / PDF로 저장</button></p>
+</body></html>`;
+
+  const w = window.open('', '_blank');
+  if (!w) { alert('팝업이 차단되었습니다. 보고서 표시를 허용해 주세요.'); return; }
+  w.document.write(html);
+  w.document.close();
+}
+document.getElementById('generateReport').addEventListener('click', generateReport);
+
+// ============================================================
+//  워크오브젝트 적층 — 패스 생성 + 재생
+// ============================================================
+let woToolpath = [];     // [{x,y,z}, ...] cAxis local frame, m
+let woPathIndex = 0;
+let woPlaying = false;
+const _woMat = new THREE.Matrix4();
+
+function woUpdateGhost() {
+  const shape = document.getElementById('woShape').value;
+  if (woGhost.geometry) woGhost.geometry.dispose();
+  if (shape === 'box') {
+    const wx = parseFloat(document.getElementById('woX').value)/1000;
+    const wy = parseFloat(document.getElementById('woY').value)/1000;
+    const wz = parseFloat(document.getElementById('woZ').value)/1000;
+    woGhost.geometry = new THREE.EdgesGeometry(new THREE.BoxGeometry(wx, wy, wz));
+    woGhost.position.set(0, wy/2, 0);
+  } else {
+    const d = parseFloat(document.getElementById('woD').value)/1000;
+    const h = parseFloat(document.getElementById('woH').value)/1000;
+    woGhost.geometry = new THREE.EdgesGeometry(new THREE.CylinderGeometry(d/2, d/2, h, 32));
+    woGhost.position.set(0, h/2, 0);
+  }
+  woGhost.visible = true;
+}
+
+function woBuildPath() {
+  const shape = document.getElementById('woShape').value;
+  const layerH = parseFloat(document.getElementById('woLayerH').value)/1000;
+  const track  = parseFloat(document.getElementById('woTrack').value)/1000;
+  woToolpath = [];
+
+  if (shape === 'box') {
+    const wx = parseFloat(document.getElementById('woX').value)/1000;
+    const wy = parseFloat(document.getElementById('woY').value)/1000;
+    const wz = parseFloat(document.getElementById('woZ').value)/1000;
+    const numLayers = Math.max(1, Math.round(wy / layerH));
+    const lh = wy / numLayers;
+    const numRows = Math.max(1, Math.round(wz / track));
+    const tz = wz / numRows;
+    const numCols = Math.max(1, Math.round(wx / track));
+    const tx = wx / numCols;
+    for (let li = 0; li < numLayers; li++) {
+      const y = (li + 0.5) * lh;
+      const layerForward = li % 2 === 0;
+      for (let ri = 0; ri < numRows; ri++) {
+        const z = -wz/2 + (ri + 0.5) * tz;
+        const eff = (layerForward === (ri % 2 === 0));
+        for (let ci = 0; ci < numCols; ci++) {
+          const ic = eff ? ci : (numCols - 1 - ci);
+          const x = -wx/2 + (ic + 0.5) * tx;
+          woToolpath.push({ x, y, z });
+        }
+      }
+    }
+  } else {
+    // 원기둥: 로봇은 고정 (TCP 월드 위치 고정), C축이 회전하면서 외곽 둘레 적층
+    const d = parseFloat(document.getElementById('woD').value)/1000;
+    const h = parseFloat(document.getElementById('woH').value)/1000;
+    const rr = d/2 - track/2;
+    const numLayers = Math.max(1, Math.round(h / layerH));
+    const lh = h / numLayers;
+    if (rr > 0) {
+      const numAngles = Math.max(12, Math.round((2 * Math.PI * rr) / track));
+      for (let li = 0; li < numLayers; li++) {
+        const y = (li + 0.5) * lh;
+        const dir = (li % 2 === 0) ? 1 : -1;
+        for (let pi = 0; pi < numAngles; pi++) {
+          const aDeg = (pi / numAngles) * 360 * dir;
+          // 로봇 고정 + C축 회전 모드
+          woToolpath.push({ isCylinder: true, axisCDeg: aDeg, layerY: y, rr });
+        }
+      }
+    }
+  }
+
+  document.getElementById('woPointCount').textContent = woToolpath.length;
+  woDeposit.count = 0;
+  woDeposit.instanceMatrix.needsUpdate = true;
+  woPathIndex = 0;
+  document.getElementById('woDepositCount').textContent = 0;
+  woTip.visible = false;
+  woUpdateGhost();
+}
+
+// 단순 IK — TCP를 월드 타깃으로 보내는 J1/J2/J3/J5 해석해
+// 체인: j3 → (a3, d3) elbow 굴곡 → j4 → a4 → j5(wrist center) → a5 → j6 → STL 모듈 → TCP
+// TCP는 j6 로컬 (0, -2*MODULE_HALF_Y, 0)에 위치. j5에서의 forward = a5, drop = 2*MODULE_HALF_Y.
+
+function solveIK(targetWorld) {
+  if (!currentSpec || !robotParts) return null;
+  const spec = currentSpec;
+  // TCP는 robotParts.tcpAnchor에 있고 j6 로컬 좌표. j5에서 TCP까지 = (a5, 0, 0) + tcpAnchor.position.
+  const tp = robotParts.tcpAnchor.position;
+  const TOOL_FORWARD = (spec.a5 ?? 0.04) + tp.x;
+  const TOOL_DROP = -tp.y;
+  const rw = new THREE.Vector3();
+  robotGroup.getWorldPosition(rw);
+  const dx = targetWorld.x - rw.x;
+  const dy = targetWorld.y - rw.y;
+  const dz = targetWorld.z;
+  const lx = -dx, ly = dy, lz = -dz;
+  const theta1 = Math.atan2(-lz, lx);
+  const r_tcp = Math.sqrt(lx*lx + lz*lz);
+  const h_tcp = ly;
+  // wrist(j5) 타깃 = TCP - (TOOL_FORWARD, -TOOL_DROP)
+  const r_w = r_tcp - TOOL_FORWARD;
+  const h_w = h_tcp + TOOL_DROP;
+  const dx2 = r_w - spec.a1;
+  const dy2 = h_w - spec.d1;
+  const D = Math.sqrt(dx2*dx2 + dy2*dy2);
+  const L1 = spec.a2;
+  // J3→J5 = sqrt((a3+a4)² + d3²) — elbow bend 포함
+  const a34 = (spec.a3 ?? spec.d4) + (spec.a4 ?? 0.05);
+  const d34 = spec.d3 ?? 0;
+  const L2 = Math.sqrt(a34*a34 + d34*d34);
+  const elbowOffset = Math.atan2(d34, a34);   // forearm bend 각도 (j3 +X 기준)
+  // 도달 가능 범위로 클램프
+  const Dmin = Math.abs(L1 - L2) + 0.01;
+  const Dmax = L1 + L2 - 0.01;
+  const Dc = Math.max(Dmin, Math.min(Dmax, D));
+  // 코사인 법칙
+  const cosInner = (L1*L1 + L2*L2 - Dc*Dc) / (2*L1*L2);
+  const innerAngle = Math.acos(Math.max(-1, Math.min(1, cosInner)));
+  const phi = Math.atan2(dy2, dx2);
+  const cosPsi = (L1*L1 + Dc*Dc - L2*L2) / (2*L1*Dc);
+  const psi = Math.acos(Math.max(-1, Math.min(1, cosPsi)));
+  const shoulderAngle = phi + psi;          // elbow-up
+  // state.j2 = π/2 - shoulder
+  const j2Deg = (Math.PI/2 - shoulderAngle) * 180 / Math.PI;
+  // state.j3 = γ - π/2 - elbowOffset (elbow bend 보정)
+  const j3Deg = (innerAngle - Math.PI/2 - elbowOffset) * 180 / Math.PI;
+  // J5 — wrist 수평 유지: state.j5 = state.j2 - state.j3
+  const j5Deg = j2Deg - j3Deg;
+  return {
+    j1: theta1 * 180/Math.PI,
+    j2: j2Deg,
+    j3: j3Deg,
+    j4: 0,
+    j5: j5Deg,
+    j6: 0,
+  };
+}
+
+const WO_STEP_MS = 250;          // 한 포인트당 진행 시간 (ms) — 적층 속도 조정
+function woTick() {
+  if (!woPlaying) return;
+  if (woPathIndex >= woToolpath.length) {
+    woPlaying = false;
+    woTip.visible = false;
+    document.getElementById('woPlay').textContent = '▶ 적층 재생';
+    return;
+  }
+  if (woDeposit.count >= WO_MAX) {
+    woPlaying = false;
+    alert('적층 최대 개수(' + WO_MAX + ') 도달');
+    return;
+  }
+  const track = parseFloat(document.getElementById('woTrack').value)/1000;
+  const layerH = parseFloat(document.getElementById('woLayerH').value)/1000;
+  const sx = track * 0.92, sy = layerH * 0.95, sz = track * 0.92;
+  const p = woToolpath[woPathIndex];
+
+  let depX, depY, depZ;
+  let updatedAxisC = false;
+
+  if (p.isCylinder) {
+    // 원기둥 모드: state.axisC 갱신 → 같은 월드 TCP 위치를 위해 cAxis local 보정 좌표 계산
+    state.axisC = p.axisCDeg;
+    updatedAxisC = true;
+    applyState();
+    cAxisGroup.updateMatrixWorld(true);
+    const aRad = THREE.MathUtils.degToRad(p.axisCDeg);
+    depX = p.rr * Math.cos(aRad);
+    depY = p.layerY;
+    depZ = p.rr * Math.sin(aRad);
+  } else {
+    cAxisGroup.updateMatrixWorld(true);
+    depX = p.x; depY = p.y; depZ = p.z;
+  }
+
+  // 월드 TCP 타깃 (cAxis local → world)
+  const worldTcp = new THREE.Vector3(depX, depY, depZ).applyMatrix4(cAxisGroup.matrixWorld);
+  // IK로 조인트 해석
+  const ik = solveIK(worldTcp);
+  if (ik && currentSpec) {
+    const lim = currentSpec.limits;
+    const clmp = (k, v) => Math.max(lim[k][0], Math.min(lim[k][1], v));
+    state.j1 = clmp('j1', ik.j1);
+    state.j2 = clmp('j2', ik.j2);
+    state.j3 = clmp('j3', ik.j3);
+    state.j4 = clmp('j4', ik.j4);
+    state.j5 = clmp('j5', ik.j5);
+    state.j6 = clmp('j6', ik.j6);
+  }
+  // UI 동기화
+  const updateKeys = updatedAxisC ? ['j1','j2','j3','j4','j5','j6','axisC'] : ['j1','j2','j3','j4','j5','j6'];
+  for (const k of updateKeys) {
+    const sl = document.getElementById(k);
+    const inp = document.getElementById(k+'v');
+    if (sl) sl.value = Math.round(state[k]);
+    if (inp) inp.value = state[k].toFixed(1);
+  }
+  applyState();
+  updateInfo();
+
+  // 적층 (cAxis local 좌표에 박스)
+  _woMat.makeScale(sx, sy, sz);
+  _woMat.setPosition(depX, depY, depZ);
+  woDeposit.setMatrixAt(woDeposit.count, _woMat);
+  woDeposit.count++;
+  woDeposit.instanceMatrix.needsUpdate = true;
+  woTip.position.set(depX, depY, depZ);
+  woTip.visible = true;
+  document.getElementById('woDepositCount').textContent = woDeposit.count;
+  woPathIndex++;
+  if (woPlaying) setTimeout(woTick, WO_STEP_MS);
+}
+
+document.getElementById('woShape').addEventListener('change', (e) => {
+  const isBox = e.target.value === 'box';
+  document.getElementById('woBoxDims').style.display = isBox ? '' : 'none';
+  document.getElementById('woCylDims').style.display = isBox ? 'none' : '';
+});
+document.getElementById('woBuild').addEventListener('click', woBuildPath);
+document.getElementById('woPlay').addEventListener('click', () => {
+  if (!woToolpath.length) woBuildPath();
+  woPlaying = !woPlaying;
+  document.getElementById('woPlay').textContent = woPlaying ? '⏸ 일시정지' : '▶ 적층 재생';
+  if (woPlaying) woTick();
+});
+document.getElementById('woReset').addEventListener('click', () => {
+  woPlaying = false;
+  woDeposit.count = 0;
+  woDeposit.instanceMatrix.needsUpdate = true;
+  woPathIndex = 0;
+  document.getElementById('woDepositCount').textContent = 0;
+  woTip.visible = false;
+  document.getElementById('woPlay').textContent = '▶ 적층 재생';
+});
+
 // 프리셋 자세
 function setPose(p) {
   Object.assign(state, p);
   for (const k of Object.keys(p)) {
-    const el = document.getElementById(k);
-    const val = document.getElementById(k+'v');
-    if (el) { el.value = p[k]; val.textContent = p[k] + '°'; }
+    const slider = document.getElementById(k);
+    const input  = document.getElementById(k+'v');
+    if (slider) slider.value = p[k];
+    if (input)  input.value  = p[k];
   }
   applyState(); updateInfo();
 }
 document.getElementById('presetHome').addEventListener('click', () =>
   setPose({ j1:0, j2:0, j3:0, j4:0, j5:0, j6:0, axisA:0, axisC:0 }));
-document.getElementById('presetReady').addEventListener('click', () =>
-  setPose({ j1:0, j2:-30, j3:40, j4:0, j5:60, j6:0, axisA:0, axisC:0 }));
-document.getElementById('presetWeld').addEventListener('click', () =>
-  setPose({ j1:0, j2:-45, j3:55, j4:0, j5:80, j6:0, axisA:30, axisC:0 }));
 
 // 경로 시뮬레이션
 const path = [];
@@ -1034,12 +1700,11 @@ function playPath() {
 
 function syncSlidersFromState(updateInputs=true) {
   for (const k of Object.keys(state)) {
-    const el = document.getElementById(k);
-    const val = document.getElementById(k+'v');
-    if (el) {
-      if (updateInputs) el.value = state[k];
-      val.textContent = (Math.round(state[k] * 10) / 10).toFixed(0) + '°';
-    }
+    const slider = document.getElementById(k);
+    const input  = document.getElementById(k+'v');
+    if (!slider) continue;
+    if (updateInputs) slider.value = state[k];
+    if (input) input.value = (Math.round(state[k] * 10) / 10).toFixed(0);
   }
 }
 
