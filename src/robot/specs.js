@@ -17,6 +17,21 @@
 
 export const ABB_ORANGE = 0xff6b1f;
 
+function scaleLargeRobotGeometry(reach) {
+  const ratio = reach / 2.60;
+  return {
+    d1: 0.780,
+    a1: 0.320,
+    a2: 1.125 * ratio,
+    d4: 1.142 * ratio,
+    d6: 0.200,
+    a3: 0.235 * ratio,
+    d3: 0.355,
+    a4: 0.946 * ratio,
+    a5: 0.166,
+  };
+}
+
 export const ROBOT_SPECS = {
   IRB2600: {
     name: 'IRB 2600-12/1.65', payload: 12, reach: 1.65,
@@ -37,6 +52,30 @@ export const ROBOT_SPECS = {
     d1: 0.780, a1: 0.320, a2: 1.125, d4: 1.142, d6: 0.200,
     a3: 0.235, d3: 0.355, a4: 0.946, a5: 0.166,
     limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
+    color: ABB_ORANGE,
+  },
+  IRB6710_210_265: {
+    name: 'IRB 6710-210/2.65', payload: 210, reach: 2.65,
+    ...scaleLargeRobotGeometry(2.65),
+    limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
+    color: ABB_ORANGE,
+  },
+  IRB6710_200_295: {
+    name: 'IRB 6710-200/2.95', payload: 200, reach: 2.95,
+    ...scaleLargeRobotGeometry(2.95),
+    limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
+    color: ABB_ORANGE,
+  },
+  IRB6720_210_280: {
+    name: 'IRB 6720-210/2.80', payload: 210, reach: 2.80,
+    ...scaleLargeRobotGeometry(2.80),
+    limits: { j1:[-170,170], j2:[-65,85], j3:[-180,72], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
+    color: ABB_ORANGE,
+  },
+  IRB6730_210_310: {
+    name: 'IRB 6730-210/3.10', payload: 210, reach: 3.10,
+    ...scaleLargeRobotGeometry(3.10),
+    limits: { j1:[-170,170], j2:[-65,80], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
   IRB7600: {
