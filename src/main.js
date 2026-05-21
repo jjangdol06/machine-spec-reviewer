@@ -164,6 +164,10 @@ function buildRobot(specKey) {
     child.traverse(o => { if (o.geometry) o.geometry.dispose(); });
   }
   const spec = ROBOT_SPECS[specKey];
+  if (!spec) {
+    console.warn(`Unknown robot spec: ${specKey}`);
+    return;
+  }
   currentSpec = spec;
   const orange = robotMat(spec.color);
   const dark   = robotMat(0x2c3038);
@@ -631,7 +635,7 @@ function updateInfo() {
     statusEl.textContent = '⚠ 도달 한계 근접';
     statusEl.className = 'warn';
   } else {
-    statusEl.textContent = `✓ 정상 동작 / 도달거리 ${tcpToBase.toFixed(2)}m / ${currentSpec.name}`;
+    statusEl.textContent = `✓ 정상 동작 / 도달거리 ${tcpToBase.toFixed(2)}m / ${currentSpec?.name ?? 'Unknown robot'}`;
     statusEl.className = 'ok';
   }
 

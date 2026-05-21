@@ -57,24 +57,28 @@ export const ROBOT_SPECS = {
   IRB6710_210_265: {
     name: 'IRB 6710-210/2.65', payload: 210, reach: 2.65,
     ...scaleLargeRobotGeometry(2.65),
+    a3: 0.262, d3: 0.238365, a4: 0.876503, a5: 0.146697,
     limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
   IRB6710_200_295: {
     name: 'IRB 6710-200/2.95', payload: 200, reach: 2.95,
     ...scaleLargeRobotGeometry(2.95),
+    a3: 0.262, d3: 0.108558, a4: 1.179503, a5: 0.146697,
     limits: { j1:[-170,170], j2:[-65,85], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
   IRB6720_210_280: {
     name: 'IRB 6720-210/2.80', payload: 210, reach: 2.80,
     ...scaleLargeRobotGeometry(2.80),
+    a3: 0.262, d3: 0.274462, a4: 0.924538, a5: 0.158902,
     limits: { j1:[-170,170], j2:[-65,85], j3:[-180,72], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
   IRB6730_210_310: {
     name: 'IRB 6730-210/3.10', payload: 210, reach: 3.10,
     ...scaleLargeRobotGeometry(3.10),
+    a1: 0.340, a3: 0.312, d3: 0.028654, a4: 1.284538, a5: 0.158902,
     limits: { j1:[-170,170], j2:[-65,80], j3:[-180,70], j4:[-300,300], j5:[-130,130], j6:[-360,360] },
     color: ABB_ORANGE,
   },
